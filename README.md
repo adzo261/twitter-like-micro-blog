@@ -1,5 +1,3 @@
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/adzo261/todo-wallpaper-cli/blob/master/LICENSE.txt)
-
 # Twitter Like Micro Blog
 
 > Twitter like micro blogging site based on Django,Jquery,Ajax and Twitter Bootstrap.
@@ -12,9 +10,9 @@ https://twitter-like-micro-blog.herokuapp.com/
 
 - [ ] Home page
 - [ ] Feature to follow users
-- [x] <span style="color:green">Feature to like posts</span>
+- [x] <b>Feature to like posts</b>
 - [ ] SearchBar to search users and tags
-- [x] <span style="color:green">Detect tags from post</span>
+- [x] <b>Detect tags from post</b>
 - [ ] Tag page
 - [ ] User profile page
 - [ ] Reset password
