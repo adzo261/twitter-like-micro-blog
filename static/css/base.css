@@ -1,0 +1,38 @@
+.content {
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+.btn {
+  color: white;
+  background: #ff6f00;
+  border: none;
+}
+.quack {
+  background: white;
+}
+a:hover {
+  color: white;
+}
+.btn:hover {
+  color: white;
+  background: #ff9800;
+}
+.nav-link,
+.navbar-brand,
+.btn {
+  color: #ffe0b2;
+}
+
+.form-control:focus {
+  outline: none !important;
+  border: 1px solid #ff9800;
+  box-shadow: 0 0 10px #ffcc80;
+}
+
+.fas:hover {
+  color: #ff9800;
+}
+.link:hover {
+  color: #ff9800;
+}
