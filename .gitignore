@@ -2,3 +2,4 @@
 *.sqlite3
 secret.py
 *.pyc
+__pycache__/
