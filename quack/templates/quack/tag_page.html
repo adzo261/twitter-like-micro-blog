@@ -1,31 +1,12 @@
-{% extends 'base.html' %}{%load static %} {% block content %} {% if user.is_authenticated %}
+{% extends 'base.html' %}{%load static %} {% block content %} 
 <div class="row">
-  <div class="col">
-  </div>
-  <div class="col-5" style="text-align:center">
-   <div class="card card-body w-50 card-whatsup" >
-    <form method="POST">
-      {% csrf_token %}
-      <div id="div_id_content" class="form-group" style="text-align: center">
-        <textarea
-          type="text"
-          name="content"
-          maxlength="250"
-          autofocus
-          class="textinput textInput form-control input-sm"
-          id="id_content"
-          placeholder="What's on your mind?"
-          rows="4"
-          style="resize: none;font-size:2vh"
-        ></textarea>
+    <div class="col">
       </div>
-      
-      <div class="form-group" >
-        <div id="char_count"  style="float:left;">250</div>
-        <button class="btn btn-quack" type="submit" style="border-radius: 8px;float:right">Quack</button>
-    </div>
-      </form>
-    </div>
+  <div class="col-5" style="text-align:center ">
+      <div class="border-bottom pt-3">
+          <h2>{{tag}}</h2>
+      </div>
+    
     {%for post,like in zipped_data%}
     <div class="card card-body w-50 card-display"  >
   <div style="text-align:left">{{post.user.first_name}} {{post.user.last_name}}</div>
@@ -49,27 +30,19 @@
   <div style="text-align:left;font-size:0.6vw;font-weight:20px;position: relative;
   bottom: 0;
   width: 100%;">{{post.date_posted}} </div></div>
+  {% empty %}
+     <div style="display:inline-block;margin-top:8vh;font-size:1vw"> 
+       {%if invalid %}
+       <h3>Invalid tag! Tag must begin with '#' sign.</h3></div>
+       {%else%}
+       <h3>No tweets of this tag</h3></div>
+       {%endif%}
   {% endfor%}
-</div>
-  <div class="col">
-    </div>
   </div>
-    {% else %}
-    <div class="jumbotron">
-      <h1 class="display-4">Hello, world!</h1>
-      <p class="lead">
-        This is a simple hero unit, a simple jumbotron-style component for
-        calling extra attention to featured content or information.
-      </p>
-      <hr class="my-4" />
-      <p>
-        It uses utility classes for typography and spacing to space content out
-        within the larger container.
-      </p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </div>
-    {% endif %} 
+<div class="col">
+  </div>
 </div>
+ 
 {% endblock content %}
 {%block javascript%}
   <script>

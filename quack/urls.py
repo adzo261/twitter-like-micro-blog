@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from .forms import LogInForm
 from . import views as quack_views
 from django.contrib.auth import views as auth_views
@@ -11,4 +11,6 @@ urlpatterns = [
     path('signup/', quack_views.signup, name='signup'),
     path('profile/', quack_views.profile, name='profile'),
     path('like/', quack_views.like, name='like'),
+    path('tags/<tag>/',
+         quack_views.tag_page, name='tag_page'),
 ]

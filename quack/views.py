@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import SignUpForm, LogInForm, UserUpdateForm, ProfileUpdateForm, PostQuackForm
 from .models import Quack
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 try:
     from django.utils import simplejson as json
 except ImportError:
@@ -22,7 +22,12 @@ def home(request):
                 post_quack_form.instance.user = request.user
                 post_quack_form.instance.tags = " ".join(
                     filter(lambda x: x[0] == '#', post_quack_form.instance.content.split()))
-                print(post_quack_form)
+
+                print(post_quack_form.instance.tags)
+                # post_quack_form.instance.tags = [x[1:]
+                #                                  for x in post_quack_form.instance.tags.split()]
+
+                print(post_quack_form.instance.tags)
                 post_quack_form.save()
                 return redirect('home')
         else:
@@ -88,3 +93,20 @@ def like(request):
            'liked': message, 'pk': quack_pk}
     # use mimetype instead of content_type if django < 5
     return HttpResponse(json.dumps(ctx), content_type='application/json')
+
+
+def tag_page(request, tag):
+    invalid = False
+    posts = Quack.objects.filter(tags__contains=tag)
+    tags = []
+    for x in posts:
+        for y in x.tags.split():
+            tags.append(y)
+    print(tags)
+    if tag not in tags:
+        posts = []
+    liked = [True if post.likes.filter(
+        username=request.user).exists() else False for post in posts]
+    if tag[0] != '#':
+        posts, liked, invalid = [], [], True
+    return render(request, 'quack/tag_page.html', {'zipped_data': zip(posts, liked), 'tag': tag, 'invalid': invalid})
