@@ -1,94 +1,74 @@
 {% extends 'base.html' %}{%load static %} {% block content %} {% if user.is_authenticated %}
-<div class="row">
-  <div class="col">
-  </div>
-  <div class="col-5" style="text-align:center">
-   <div class="card card-body w-50 card-whatsup" >
-    <form method="POST">
-      {% csrf_token %}
-      <div id="div_id_content" class="form-group" style="text-align: center">
-        <textarea
-          type="text"
-          name="content"
-          maxlength="250"
-          autofocus
-          class="textinput textInput form-control input-sm"
-          id="id_content"
-          placeholder="What's on your mind?"
-          rows="4"
-          style="resize: none;font-size:2vh"
-        ></textarea>
+<div class="container-fluid">
+  <div class="row justify-content-center mt-5 ">
+    <div class="col-10 col-md-4 col-lg-3 justify-content-between">
+      <div class="row mb-4">
+        <div class="card card-body card-whatsup">
+          <form method="POST">
+            {% csrf_token %}
+            <div id="div_id_content" class="form-group" style="text-align: center">
+              <textarea type="text" name="content" maxlength="250" autofocus
+                class="textinput textInput form-control input-sm" id="id_content" placeholder="What's on your mind?"
+                rows="4" style="resize: none;font-size:100%"></textarea>
+            </div>
+            <div class="form-group card-whatsup-bottom row justify-content-between">
+              <div id="char_count" class="col-4 col-md-4 col-lg-4">250</div>
+              <button class="btn btn-quack col-4 col-md-4 col-lg-4 mr-3" type="submit">Quack</button>
+            </div>
+          </form>
+        </div>
       </div>
-      
-      <div class="form-group" >
-        <div id="char_count"  style="float:left;">250</div>
-        <button class="btn btn-quack" type="submit" style="border-radius: 8px;float:right">Quack</button>
+
+      {%include 'quack/card.html'  with zipped_data=zipped_data  %}
+
     </div>
-      </form>
-    </div>
-    {%for post,like in zipped_data%}
-    <div class="card card-body w-50 card-display"  >
-  <div style="text-align:left">{{post.user.first_name}} {{post.user.last_name}}</div>
-  <div style="text-align:left"> <a  class="link" href="{% url 'profile' %}">@{{post.user}}</a></div>
-  <div class="m-1" id="quack" style="text-align:left">
-      {% for word in post.content.split %}
-        {% if word in post.tags.split %}
-        <a class="link" href="{% url 'tag_page' word %}">{{word}}</a>
-        {% else %}
-        {{word}}
-        {% endif %}
-    {% endfor%}
   </div>
-  <div style="text-align:right"><a id="like" pk={{post.pk}} url="{% url 'like' %}" >
-    {%if like%}
-    <i class="fas fa-heart fas-{{post.pk}}" style="color:red"></i></a>
-    {%else%}
-    <i class="fas fa-heart fas-{{post.pk}}" style="color:#ECEFF1"></i></a>
-    {% endif %}
-  </div>
-  <div style="text-align:left;font-size:0.6vw;font-weight:20px;position: relative;
-  bottom: 0;
-  width: 100%;">{{post.date_posted}} </div></div>
-  {% endfor%}
 </div>
-  <div class="col">
+{% else %}
+<div class="h-100 container-fluid">
+  <div class="h-100 row">
+    <div class=" col-12 col-lg-4 left-banner jumbotron">
+      <p class="display-3 text-center" style="background:white">QUACK</p>
+      <div class=" h-100 row align-items-center text-center">
+        <div class="col">
+          <p class="h5 mt-4">Follow your interests.</p>
+          <p class="h5 mt-4">Hear what ducks are quacking about.</p>
+          <p class="h5 mt-4">Join the conversation.</p>
+        </div>
+      </div>
+
+    </div>
+    <div class=" col-12 col-lg-8 right-banner  ">
+      <div class="h-100 row align-items-center text-center" style=" background:white">
+        <div class="col">
+          <h1 class="display-3 align-self-start">What's up duckiee!</h1>
+          <p class="h6 ">
+            Meet new ducks and quack!
+          </p>
+          <hr class="my-4" />
+          <p class="text-center lead">
+            See what’s happening in the world right now
+          </p>
+
+          <p class="h4">Join Quack today.</p>
+          <div class="h-50 row align-items-center justify-content-center" style=" background:white">
+            <p class="h4 mt-4 col-6 "> <a class="btn btn-block full-width" role="button" href="{% url 'signup' %}"">
+                Sign Up
+              </a></p>
+              <div class=" w-100">
+          </div>
+          <p class=" h4 mt-4 col-6"> <a class="home-login btn btn-block full-width" role="button"
+              href="{% url 'login' %}"">
+                Log In
+            </a></p>
+              </div>
+            </div>
+          </div>
     </div>
   </div>
-    {% else %}
-    <div class="jumbotron">
-      <h1 class="display-4">Hello, world!</h1>
-      <p class="lead">
-        This is a simple hero unit, a simple jumbotron-style component for
-        calling extra attention to featured content or information.
-      </p>
-      <hr class="my-4" />
-      <p>
-        It uses utility classes for typography and spacing to space content out
-        within the larger container.
-      </p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </div>
-    {% endif %} 
 </div>
+{% endif %}
 {% endblock content %}
 {%block javascript%}
-  <script>
-  $("[id='like']").click(function(){
-        $.ajax({
-                type: "POST",
-                url: "{% url 'like' %}",
-                data: {'pk': $(this).attr('pk'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-                dataType: "json",
-                success: function(response) {
-                        if(response.liked)
-                            $('.fas-'+response.pk).css("color","red")
-                        else
-                            $('.fas-'+response.pk).css("color","#ECEFF1")
-                  },
-                  error: function(rs, e) {
-                        alert(rs.responseText);
-                  }
-            }); 
-      })
-</script>
+{% include 'quack/like.html' %}
 {% endblock javascript %}

@@ -1,0 +1,25 @@
+{%for post,like in zipped_data%}
+<div class="row mb-4">
+    <div class="card card-body card-display">
+        <div class="m-1 ">{{post.user.first_name}} {{post.user.last_name}}</div>
+        <div class="m-1 "> <a class="link" href="{% url 'profile' %}">@{{post.user}}</a></div>
+        <div class="m-1 " id="quack" style="text-align:left">
+            {% for word in post.content.split %}
+            {% if word in post.tags.split %}
+            <a class="link" href="{% url 'tag_page' word %}">{{word}}</a>
+            {% else %}
+            {{word}}
+            {% endif %}
+            {% endfor%}
+        </div>
+        <div style="text-align:right"><a id="like" pk={{post.pk}} url="{% url 'like' %}">
+                {%if like%}
+                <i class="fas fa-heart fas-{{post.pk}}" style="color:#bc5100"></i></a>
+            {%else%}
+            <i class="fas fa-heart fas-{{post.pk}}" style="color:#B0B0B0"></i></a>
+            {% endif %}
+        </div>
+        <div class="card-display-bottom">{{post.date_posted}} </div>
+    </div>
+</div>
+{% endfor%}

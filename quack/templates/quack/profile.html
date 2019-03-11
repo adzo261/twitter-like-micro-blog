@@ -1,87 +1,55 @@
 {% extends "base.html" %} {% block content %}
-<p style="text-align: center">
-  <button
-    class="btn"
-    type="button"
-    data-toggle="collapse"
-    data-target="#collapseUpdateForm"
-    aria-expanded="false"
-    aria-controls="collapseUpdateForm"
-  >
-    Update Profile
-  </button>
-</p>
-<div class="collapse" id="collapseUpdateForm">
-  <div class="card card-body" style="margin-left:35%;margin-right:35%">
-    <div class="content-section">
-      <form method="POST">
-        {% csrf_token %}
-        <div id="div_id_username" class="form-group" style="text-align: center">
-          <input
-            type="text"
-            name="username"
-            maxlength="150"
-            autofocus
-            class="textinput textInput form-control input-sm"
-            required
-            id="id_username"
-            placeholder="Username"
-            value="{{u_form.username.value}}""
-          />
-          {% if u_form.username.errors %} {% for error in u_form.username.errors %}
-          <p style="color:red">
-            {{ error | escape }}
-          </p>
-          {% endfor %} {% endif %}
-        </div>
-        <div
-        id="div_id_email"
-        class="control-group form-group"
-        style="text-align: center"
-      >
-        <input
-          type="email"
-          name="email"
-          class="emailinput form-control input-sm"
-          required
-          id="id_email"
-          placeholder="Email"
-          value="{{u_form.email.value}}""
-        />
-        {% if u_form.email.errors %} {% for error in u_form.email.errors %}
-        <p style="color:red">
-          {{ error | escape }}
-        </p>
-        {% endfor %} {% endif %}
-      </div>
-      <div
-        id="div_id_location"
-        class="control-group form-group"
-        style="text-align: center"
-      >
-        <input
-          type="text"
-          name="location"
-          class="form-control input-sm"
-          required
-          id="id_location"
-          maxlength="30"
-          placeholder="Location"
-          value="{{p_form.location.value}}""
-        />
-        {% if p_form.location.errors %} {% for error in p_form.location.errors %}
-        <p style="color:red">
-          {{ error | escape }}
-        </p>
-        {% endfor %} {% endif %}
-      </div>
-      <div class="form-group" style="text-align: center">
-            <button class="btn" type="submit">Save</button>
-          </div>
-      </form>
-     
-     </div>
+<div class="container">
+  <div class="row justify-content-center mt-5 mb-4">
+    <div class="col-7 col-md-3 text-center">
+      <button class="btn btn-md" type="button" data-toggle="collapse" data-target="#collapseUpdateForm"
+        aria-expanded="false" aria-controls="collapseUpdateForm">
+        Update Profile
+      </button>
     </div>
   </div>
-  {% endblock content %}
+  <div class="collapse mt-4" id="collapseUpdateForm">
+    <div class="row justify-content-center">
+      <div class="card card-body col-10 col-md-6 col-lg-5">
+        <div class=" content-section">
+          <form method="POST">
+            {% csrf_token %}
+            <div id="div_id_username" class="form-group" style="text-align: center">
+              <input type="text" name="username" maxlength="150" autofocus
+                class="textinput textInput form-control input-sm" required id="id_username" placeholder="Username"
+                value="{{ u_form.username.value }}" />
+              {% if u_form.username.errors %}
+              {% for error in u_form.username.errors%}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+            <div id="div_id_email" class="control-group form-group" style="text-align: center">
+              <input type="email" name="email" class="emailinput form-control
+          input-sm" required id="id_email" placeholder="Email" value="{{ u_form.email.value }}" />
+              {% if u_form.email.errors %}{% for error in u_form.email.errors %}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+            <div id="div_id_location" class="control-group form-group" style="text-align: center">
+              <input type="text" name="location" class="form-control input-sm" required id="id_location" maxlength="30"
+                placeholder="Location" value="{{ p_form.location.value }}" />
+              {% if p_form.location.errors%} {% for error in p_form.location.errors %}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+            <div class="form-group" style="text-align: center">
+              <button class="btn" type="submit">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+{% endblock content %}

@@ -1,67 +1,14 @@
-{% extends 'base.html' %}{%load static %} {% block content %} 
-<div class="row">
-    <div class="col">
-      </div>
-  <div class="col-5" style="text-align:center ">
-      <div class="border-bottom pt-3">
-          <h2>{{tag}}</h2>
-      </div>
-    
-    {%for post,like in zipped_data%}
-    <div class="card card-body w-50 card-display"  >
-  <div style="text-align:left">{{post.user.first_name}} {{post.user.last_name}}</div>
-  <div style="text-align:left"> <a  class="link" href="{% url 'profile' %}">@{{post.user}}</a></div>
-  <div class="m-1" id="quack" style="text-align:left">
-      {% for word in post.content.split %}
-        {% if word in post.tags.split %}
-        <a class="link" href="{% url 'tag_page' word %}">{{word}}</a>
-        {% else %}
-        {{word}}
-        {% endif %}
-    {% endfor%}
+{% extends 'base.html' %}{%load static %} {% block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-10 col-md-4 col-lg-3 justify-content-between"">
+      <div class=" custom-border pt-3 text-center mb-3">
+    <h2>{{tag}}</h2>
   </div>
-  <div style="text-align:right"><a id="like" pk={{post.pk}} url="{% url 'like' %}" >
-    {%if like%}
-    <i class="fas fa-heart fas-{{post.pk}}" style="color:red"></i></a>
-    {%else%}
-    <i class="fas fa-heart fas-{{post.pk}}" style="color:#ECEFF1"></i></a>
-    {% endif %}
-  </div>
-  <div style="text-align:left;font-size:0.6vw;font-weight:20px;position: relative;
-  bottom: 0;
-  width: 100%;">{{post.date_posted}} </div></div>
-  {% empty %}
-     <div style="display:inline-block;margin-top:8vh;font-size:1vw"> 
-       {%if invalid %}
-       <h3>Invalid tag! Tag must begin with '#' sign.</h3></div>
-       {%else%}
-       <h3>No tweets of this tag</h3></div>
-       {%endif%}
-  {% endfor%}
-  </div>
-<div class="col">
-  </div>
+  {%include 'quack/card.html' with zipped_data=zipped_data %}
 </div>
- 
+</div>
+
 {% endblock content %}
 {%block javascript%}
-  <script>
-  $("[id='like']").click(function(){
-        $.ajax({
-                type: "POST",
-                url: "{% url 'like' %}",
-                data: {'pk': $(this).attr('pk'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-                dataType: "json",
-                success: function(response) {
-                        if(response.liked)
-                            $('.fas-'+response.pk).css("color","red")
-                        else
-                            $('.fas-'+response.pk).css("color","#ECEFF1")
-                  },
-                  error: function(rs, e) {
-                        alert(rs.responseText);
-                  }
-            }); 
-      })
-</script>
+{% include 'quack/like.html' %}
 {% endblock javascript %}

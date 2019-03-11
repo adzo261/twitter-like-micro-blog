@@ -1,131 +1,77 @@
 {% extends "base.html" %} {% block content %}
-<div class="content-section" style="margin-left:35%;margin-right:35%">
-  <form method="POST">
-    {% csrf_token %}
-    <fieldset class="form-group">
-      <legend class="border-bottom mb-4">Join Today</legend>
-      <div id="div_id_username" class="form-group" style="text-align: center">
-        <input
-          type="text"
-          name="username"
-          maxlength="150"
-          autofocus
-          class="textinput textInput form-control input-sm"
-          required
-          id="id_username"
-          placeholder="Username"
-        />
-        {% if form.username.errors %} {% for error in form.username.errors %}
-        <p style="color:red">
-          {{ error | escape }}
-        </p>
-        {% endfor %} {% endif %}
+<div class="container">
+  <div class="row justify-content-center mt-5 mb-4">
+    <div class="card card-body col-10 col-md-6 col-lg-5">
+      <div class="content-section">
+        <form method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group">
+            <legend class="custom-border mb-4 text-center">Join Today</legend>
+            <div id="div_id_username" class="form-group" style="text-align: center">
+              <input type="text" name="username" maxlength="150" autofocus
+                class="textinput textInput form-control input-sm" required id="id_username" placeholder="Username" />
+              {% if form.username.errors %} {% for error in form.username.errors %}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+            <div id="div_id_first_name" class="control-group form-group" style="text-align: center">
+              <input type="text" name="first_name" class="textinput textInput form-control input-sm" required
+                id="id_first_name" placeholder="First Name" />
+              {% if form.first_name.errors %} {% for error in form.first_name.errors%}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+            <div id="div_id_last_name" class="control-group form-group" style="text-align: center">
+              <input type="text" name="last_name" class="textinput textInput form-control input-sm" required
+                id="id_last_name" placeholder="Last Name" />
+              {% if form.last_name.errors %} {% for error in form.last_name.errors %}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+            <div id="div_id_email" class="control-group form-group" style="text-align: center">
+              <input type="email" name="email" class="emailinput form-control input-sm" required id="id_email"
+                placeholder="Email" />
+              {% if form.email.errors %} {% for error in form.email.errors %}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+            <div id="div_id_password1" class="control-group form-group" style="text-align: center">
+              <input type="password" name="password1" class="textinput textInput form-control input-sm" required
+                id="id_password1" placeholder="Password" />
+              {% if form.password1.errors %} {% for error in form.password1.errors %}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+            <div id="div_id_password2" class="control-group form-group" style="text-align: center">
+              <input type="password" name="password2" class="textinput textInput form-control input-sm" required
+                id="id_password2" placeholder="Confirm Password" />
+              {% if form.password2.errors %} {% for error in form.password2.errors %}
+              <p style="color:red">
+                {{ error | escape }}
+              </p>
+              {% endfor %} {% endif %}
+            </div>
+          </fieldset>
+          <div class="form-group" style="text-align: center">
+            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+          </div>
+        </form>
+        <small class="text-muted">
+          Already Have An Account?
+          <a class="ml-2 link" href="{% url 'login' %}">Sign In</a>
+        </small>
       </div>
-      <div
-        id="div_id_first_name"
-        class="control-group form-group"
-        style="text-align: center"
-      >
-        <input
-          type="text"
-          name="first_name"
-          class="textinput textInput form-control input-sm"
-          required
-          id="id_first_name"
-          placeholder="First Name"
-        />
-        {% if form.first_name.errors %} {% for error in form.first_name.errors%}
-        <p style="color:red">
-          {{ error | escape }}
-        </p>
-        {% endfor %} {% endif %}
-      </div>
-      <div
-        id="div_id_last_name"
-        class="control-group form-group"
-        style="text-align: center"
-      >
-        <input
-          type="text"
-          name="last_name"
-          class="textinput textInput form-control input-sm"
-          required
-          id="id_last_name"
-          placeholder="Last Name"
-        />
-        {% if form.last_name.errors %} {% for error in form.last_name.errors %}
-        <p style="color:red">
-          {{ error | escape }}
-        </p>
-        {% endfor %} {% endif %}
-      </div>
-      <div
-        id="div_id_email"
-        class="control-group form-group"
-        style="text-align: center"
-      >
-        <input
-          type="email"
-          name="email"
-          class="emailinput form-control input-sm"
-          required
-          id="id_email"
-          placeholder="Email"
-        />
-        {% if form.email.errors %} {% for error in form.email.errors %}
-        <p style="color:red">
-          {{ error | escape }}
-        </p>
-        {% endfor %} {% endif %}
-      </div>
-      <div
-        id="div_id_password1"
-        class="control-group form-group"
-        style="text-align: center"
-      >
-        <input
-          type="password"
-          name="password1"
-          class="textinput textInput form-control input-sm"
-          required
-          id="id_password1"
-          placeholder="Password"
-        />
-        {% if form.password1.errors %} {% for error in form.password1.errors %}
-        <p style="color:red">
-          {{ error | escape }}
-        </p>
-        {% endfor %} {% endif %}
-      </div>
-      <div
-        id="div_id_password2"
-        class="control-group form-group"
-        style="text-align: center"
-      >
-        <input
-          type="password"
-          name="password2"
-          class="textinput textInput form-control input-sm"
-          required
-          id="id_password2"
-          placeholder="Confirm Password"
-        />
-        {% if form.password2.errors %} {% for error in form.password2.errors %}
-        <p style="color:red">
-          {{ error | escape }}
-        </p>
-        {% endfor %} {% endif %}
-      </div>
-    </fieldset>
-    <div class="form-group" style="text-align: center">
-      <button class="btn btn-outline-info" type="submit">Sign Up</button>
     </div>
-  </form>
-  <div class="border-top pt-3">
-    <small class="text-muted">
-      Already Have An Account?
-      <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-    </small>
   </div>
 </div>
 {% endblock content %}

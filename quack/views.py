@@ -9,6 +9,7 @@ try:
 except ImportError:
     import json
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -22,12 +23,6 @@ def home(request):
                 post_quack_form.instance.user = request.user
                 post_quack_form.instance.tags = " ".join(
                     filter(lambda x: x[0] == '#', post_quack_form.instance.content.split()))
-
-                print(post_quack_form.instance.tags)
-                # post_quack_form.instance.tags = [x[1:]
-                #                                  for x in post_quack_form.instance.tags.split()]
-
-                print(post_quack_form.instance.tags)
                 post_quack_form.save()
                 return redirect('home')
         else:
@@ -49,12 +44,14 @@ def signup(request):
             email = form.cleaned_data.get('email')
             password1 = form.cleaned_data.get('password1')
             password2 = form.cleaned_data.get('password2')
+            messages.success(request, f'Your account has been created!')
             return redirect('login')
     else:
         form = SignUpForm()
     return render(request, 'quack/signup.html', {'form': form})
 
 
+@login_required
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -77,6 +74,7 @@ def profile(request):
 
 
 @require_POST
+@login_required
 def like(request):
     if request.method == 'POST':
         current_user = request.user
@@ -95,6 +93,7 @@ def like(request):
     return HttpResponse(json.dumps(ctx), content_type='application/json')
 
 
+@login_required
 def tag_page(request, tag):
     invalid = False
     posts = Quack.objects.filter(tags__contains=tag)
@@ -102,7 +101,6 @@ def tag_page(request, tag):
     for x in posts:
         for y in x.tags.split():
             tags.append(y)
-    print(tags)
     if tag not in tags:
         posts = []
     liked = [True if post.likes.filter(

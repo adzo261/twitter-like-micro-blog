@@ -8,7 +8,8 @@ https://twitter-like-micro-blog.herokuapp.com/
 
 ## Todo
 
-- [ ] Home page
+- [x] <b>Home page</b>
+- [x] <b>Responsive Design</b>
 - [ ] Feature to follow users
 - [x] <b>Feature to like posts</b>
 - [ ] SearchBar to search users and tags

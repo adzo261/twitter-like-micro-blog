@@ -1,8 +1,10 @@
 {% extends "base.html" %} {% block content %}
-<h2>You have been logged out</h2>
-<div class="border-top pt-3">
-  <small class="text-muted">
-    <a href="{% url 'login' %}">Log In Again</a>
-  </small>
+<div class="row justify-content-center mt-5">
+  <h4 class="col-11 col-md-5 col-lg-4 text-center logout-msg">You have been logged out</h4>
+</div>
+<div class="row justify-content-center">
+  <div class=" col-10 col-md-4 col-lg-5 text-center">
+    <a class="link" href="{% url 'login' %}">Log In Again</a>
+  </div>
 </div>
 {% endblock content %}

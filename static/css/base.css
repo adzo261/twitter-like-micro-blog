@@ -1,64 +1,135 @@
-.content {
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-top: 2%;
+:root {
+  --primary-color: #bc5100;
+  --primary-light-color: #ce7d40;
+  --bg-color: #fbe9e7;
+  --accent-color: white;
+  --secondary-color: white;  /*#fff9c4;*/
+}
+html,body {
+  font-family: 'Quicksand', sans-serif;
+ font-weight: 300;
+  background: var(--bg-color);
+  height:100%;
+  width:100%;
+  margin:0px;
+  padding-bottom: 2%;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+ }
+
+.navbar{
+background: var(--primary-color);
+z-index: 5%;
+}
+.content
+{
+  height:100%;
+}
+
+
+
+.card:not(.card-whatsup) {
+  border-color: var(--secondary-color);
+  background: var(--secondary-color);
+  color: var(--primary-color);
 }
 .btn {
-  color: white;
-  background: #ff6f00;
+  color: var(--accent-color);
+  background: var(--primary-color);
   border: none;
 }
 a:hover {
-  color: white;
+  color: var(--accent-color);
 }
 .btn:hover {
-  color: white;
-  background: #ff9800;
+  color: var(--accent-color);
+  background: var(--primary-light-color);
+}
+.link:hover {
+  color: var(--primary-color);
+}
+.dropdown-menu,
+.dropdown-item,
+.dropdown-item:hover {
+  color: var(--accent-color);
+  background: var(--primary-light-color);
+  border: none;
 }
 .nav-link,
 .navbar-brand,
 .btn {
-  color: #ffe0b2;
+  color: var(--accent-color);
 }
 
 .form-control:focus {
   outline: none !important;
-  border: 1px solid #ff9800;
+  border: 1px solid var(--primary-color);
   box-shadow: 0 0 10px #ffcc80;
 }
 
-.fas:hover {
-  color: #ff9800;
-}
-.link:hover {
-  color: #ff9800;
-}
-
 .btn-quack {
-  display: inline-block;
-  width: 6vw;
-  height: 5vh;
-
-  font-size: 1.1vw;
+  border-radius: 8px;
+  font-size: 100%;
+  text-align: center;
 }
 #char_count {
-  display: inline-block;
-  margin-left: 0.5vw;
-
-  font-size: 1.1vw;
+  font-size: 100%;
+  color: var(--primary-color);
 }
 
 .card-whatsup {
-  text-align: center;
+  box-shadow: none;
+  border-color: #f7f6f9;
   background: #f7f6f9;
-  height: 27vh;
-  display: inline-block;
   border-radius: 10px;
+  height: auto;
+}
+
+.card-whatsup-bottom {
+  justify-content: end;
+  border: None;
+  bottom: 0;
 }
 
 .card-display {
-  display: inline-block;
+  font-size: 100%;
   border-radius: 10px;
-  margin-top: 8vh;
-  font-size: 1vw;
+  font-weight: 545;
+}
+.card-display-bottom {
+  text-align: left;
+  font-size: 90%;
+  color: gray;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+.custom-border {
+  border-bottom:1px solid var(--primary-color);
+}
+
+.logout-msg,h2
+{
+  color:var(--primary-color);
+}
+
+.left-banner
+{ 
+  background: var(--bg-color);
+  color: var(--primary-color);
+}
+.right-banner
+{
+  background: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.home-login
+{
+  background: var(--accent-color);
+  color:var(--primary-color); 
+  border:solid;
+  border-width: thin;
+  border-color:var(--primary-color);
 }

@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'quack.apps.QuackConfig',
-    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,7 +119,7 @@ STATICFILES_DIRS = (
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'home'
-#LOGIN_URL = 'login'
+LOGIN_URL = 'login'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

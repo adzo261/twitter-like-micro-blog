@@ -1,0 +1,19 @@
+<script>
+    $("[id='like']").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'like' %}",
+            data: { 'pk': $(this).attr('pk'), 'csrfmiddlewaretoken': '{{ csrf_token }}' },
+            dataType: "json",
+            success: function (response) {
+                if (response.liked)
+                    $('.fas-' + response.pk).css("color", "#bc5100")
+                else
+                    $('.fas-' + response.pk).css("color", "#B0B0B0")
+            },
+            error: function (rs, e) {
+                alert(rs.responseText);
+            }
+        });
+    })
+</script>
