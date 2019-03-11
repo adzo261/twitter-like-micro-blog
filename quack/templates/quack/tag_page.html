@@ -1,13 +1,14 @@
 {% extends 'base.html' %}{%load static %} {% block content %}
-<div class="row justify-content-center mt-5">
-  <div class="col-10 col-md-4 col-lg-3 justify-content-between"">
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-10 col-md-4 col-lg-3 justify-content-between"">
       <div class=" custom-border pt-3 text-center mb-3">
-    <h2>{{tag}}</h2>
+      <h2>{{tag}}</h2>
+    </div>
+    {%include 'quack/card.html' with zipped_data=zipped_data %}
   </div>
-  {%include 'quack/card.html' with zipped_data=zipped_data %}
 </div>
 </div>
-
 {% endblock content %}
 {%block javascript%}
 {% include 'quack/like.html' %}
