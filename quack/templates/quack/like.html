@@ -6,10 +6,13 @@
             data: { 'pk': $(this).attr('pk'), 'csrfmiddlewaretoken': '{{ csrf_token }}' },
             dataType: "json",
             success: function (response) {
-                if (response.liked)
+                if (response.liked) {
                     $('.fas-' + response.pk).css("color", "#bc5100")
-                else
+                }
+                else {
                     $('.fas-' + response.pk).css("color", "#B0B0B0")
+                }
+                $('.fas-' + response.pk).html(" " + response.likes_count)
             },
             error: function (rs, e) {
                 alert(rs.responseText);

@@ -1,0 +1,27 @@
+<script>
+    var options = {
+        url: function (str) {
+            return "{% url 'search' phrase=12345 %}".replace(/12345/, str.toString());
+
+        },
+
+        getValue: "keyword",
+
+        list: {
+
+            onChooseEvent: function () {
+                var value = $("#autocomplete").getSelectedItemData().keyword;
+                if (value[0] == '#') {
+                    value = encodeURIComponent(value)
+                    document.location.href = "{% url 'tag_page' tag=12345 %}".replace(/12345/, value);
+                }
+                else {
+                    document.location.href = "{% url 'profile' username=12345 %}".replace(/12345/, value);
+                }
+
+            }
+        }
+    };
+
+    $("#autocomplete").easyAutocomplete(options);
+</script>

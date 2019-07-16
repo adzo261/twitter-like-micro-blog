@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row justify-content-center mb-4">
+        <div class="col-12 col-md-12 col-lg-12 justify-content-between"">
+            <div class=" custom-border pt-3 text-center mb-3">
+            <h2>Trending</h2>
+        </div>
+        <div class="card card-body card-display">
+            {%for tag in trending_tags%}
+            <div class="m-1 " style="text-align:center">
+                <a class="link" href="{% url 'tag_page' tag %}">{{tag}}</a>
+            </div>
+            {% endfor%}
+        </div>
+    </div>
+</div>
+</div>

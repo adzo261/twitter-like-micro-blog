@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{%load static %} {% block content %} {% if user.is_authenticated %}
 <div class="container-fluid">
   <div class="row justify-content-center mt-5 ">
-    <div class="col-10 col-md-4 col-lg-3 justify-content-between">
+    <div class="col-10 col-md-4 col-lg-3 offset-md-4 offset-lg-3 ">
       <div class="row mb-4">
         <div class="card card-body card-whatsup">
           <form method="POST">
@@ -18,11 +18,13 @@
           </form>
         </div>
       </div>
-
-      {%include 'quack/card.html'  with zipped_data=zipped_data  %}
-
+      {% include 'quack/card.html'  with zipped_data=zipped_data  %}
+    </div>
+    <div class="col-10 col-md-4 col-lg-3 offset-md-3 offset-lg-2 ">
+      {% include 'quack/trending_tags.html'  with zipped_data=zipped_data  %}
     </div>
   </div>
+</div>
 </div>
 {% else %}
 <div class="h-100 container-fluid">
@@ -70,5 +72,7 @@
 {% endif %}
 {% endblock content %}
 {%block javascript%}
-{% include 'quack/like.html' %}
-{% endblock javascript %}
+<script src=" {% static 'js/main.js' %}"></script>
+              {% include 'quack/like.html' %}
+              {% include 'quack/search.html' %}
+              {% endblock javascript %}

@@ -1,13 +1,14 @@
 :root {
-  --primary-color: #bc5100;
-  --primary-light-color: #ce7d40;
-  --bg-color: #fbe9e7;
-  --accent-color: white;
-  --secondary-color: white;  /*#fff9c4;*/
+  --primary-color: #057DCD;/*#bc5100;*/
+  --primary-light-color: #1E3D58;/*#ce7d40;*/
+  --bg-color: #E8EEF1;/* #fbe9e7; */
+  --accent-color: #E8EEF1;/* white; */
+  --secondary-color: white;
+  --hint-color: gray;/* white;  */
 }
 html,body {
   font-family: 'Quicksand', sans-serif;
- font-weight: 300;
+  font-weight: 300;
   background: var(--bg-color);
   height:100%;
   width:100%;
@@ -27,12 +28,9 @@ z-index: 5%;
   height:100%;
 }
 
-
-
 .card:not(.card-whatsup) {
   border-color: var(--secondary-color);
   background: var(--secondary-color);
-  color: var(--primary-color);
 }
 .btn {
   color: var(--accent-color);
@@ -40,7 +38,7 @@ z-index: 5%;
   border: none;
 }
 a:hover {
-  color: var(--accent-color);
+  color: var(--secondary-color);
 }
 .btn:hover {
   color: var(--accent-color);
@@ -64,8 +62,8 @@ a:hover {
 
 .form-control:focus {
   outline: none !important;
-  border: 1px solid var(--primary-color);
-  box-shadow: 0 0 10px #ffcc80;
+  border: 1px solid var(--primary-color) !important; 
+  box-shadow: 0 0 10px #6278db !important;
 }
 
 .btn-quack {
@@ -100,7 +98,7 @@ a:hover {
 .card-display-bottom {
   text-align: left;
   font-size: 90%;
-  color: gray;
+  color: var(--hint-color);
   position: relative;
   bottom: 0;
   width: 100%;

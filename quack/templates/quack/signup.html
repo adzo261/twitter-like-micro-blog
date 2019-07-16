@@ -6,7 +6,9 @@
         <form method="POST">
           {% csrf_token %}
           <fieldset class="form-group">
-            <legend class="custom-border mb-4 text-center">Join Today</legend>
+            <div class=" custom-border pt-3 text-center mb-3">
+              <h2>Join Today</h2>
+            </div>
             <div id="div_id_username" class="form-group" style="text-align: center">
               <input type="text" name="username" maxlength="150" autofocus
                 class="textinput textInput form-control input-sm" required id="id_username" placeholder="Username" />

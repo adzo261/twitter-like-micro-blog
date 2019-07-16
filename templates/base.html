@@ -9,7 +9,10 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css'%}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/easy-autocomplete.css'%}" />
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
@@ -17,7 +20,10 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg ">
+  <!--navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+
+    <!--logo-->
     <div class="d-flex flex-grow-1">
       <span class="w-100 d-lg-none d-block">
         <!-- hidden spacer to center brand on mobile --></span>
@@ -27,12 +33,28 @@
         Quack
       </a>
       <div class="w-100 text-right">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#myNavbar"
+          aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
     </div>
-    <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
+    <!--ends-->
+
+    {% if user.is_authenticated %}
+    <!--search bar to search for users or tags-->
+    <div class="container justify-content-center justify-content-md-end mt-2 mb-2">
+      <div class="row ">
+        <div class="input-group col">
+          <input id="autocomplete" type="text" class="form-control" placeholder="Username">
+        </div>
+      </div>
+    </div>
+    <!--ends-->
+    {% endif %}
+
+    <!--Navbar buttons-->
+    <div class=" collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
       <ul class="navbar-nav ml-auto flex-nowrap">
         {% if user.is_authenticated %}
         <li class="nav-item dropdown">
@@ -41,7 +63,7 @@
             {{ user }}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'profile' user %}">Profile</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'logout'%}">Log out</a>
           </div>
@@ -62,13 +84,24 @@
         </li>
       </ul>
     </div>
+    <!--ends-->
+
   </nav>
+  <!--ends-->
+
+  <!--alert messages-->
   {% if messages %} {% for message in messages %}
   <div class="alert alert-{{ message.tags }} text-center">
     {{ message }}
   </div>
   {% endfor %} {% endif %}
+  <!--ends-->
+
+  <!--space for actual content-->
   <div class="content">{% block content %} {% endblock content %}</div>
+  <!--ends-->
+
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -80,8 +113,17 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     crossorigin="anonymous"></script>
+
+  <script src="{% static 'js/jquery.easy-autocomplete.js' %}"></script>
+
+  <!--main javascript using link
   <script src="{% static 'js/main.js' %}"></script>
+  <!--ends-->
+
+  <!--javascript added directly-->
   {% block javascript %} {% endblock javascript %}
+  <!--ends-->
+
 </body>
 
 </html>
