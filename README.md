@@ -12,12 +12,12 @@ https://twitter-like-micro-blog.herokuapp.com/
 - [x] <b>Responsive Design</b>
 - [ ] Feature to follow users
 - [x] <b>Feature to like posts</b>
-- [ ] SearchBar to search users and tags
+- [x] <b>SearchBar to search users and tags</b>
 - [x] <b>Detect tags from post</b>
 - [x] <b>Tag page</b>
 - [ ] User profile page
 - [ ] Reset password
-- [ ] Trending Tags section
+- [x] <b>Trending Tags section</b>
 
 ## Development setup
 
