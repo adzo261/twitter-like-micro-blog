@@ -2,7 +2,7 @@
 <div class="row mb-4">
     <div class="card card-body card-display">
         <div class="m-1 ">{{post.user.first_name}} {{post.user.last_name}}</div>
-        <div class="m-1 "> <a class="link" href="{% url 'profile' %}">@{{post.user}}</a></div>
+        <div class="m-1 "> <a class="link" href="{% url 'profile' post.user.username %}">@{{post.user}}</a></div>
         <div class="m-1 " id="quack" style="text-align:left">
             {% for word in post.content.split %}
             {% if word|first in '#'%}
